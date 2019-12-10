@@ -1,0 +1,7 @@
+
+<beans xmlns="http://nanocontext.org/v1/schema/ctx">
+    <bean id="beanOne" class="org.nanocontext.xml.subjects.ConstructorTestSubject" scope="singleton">
+    </bean>
+    <bean id="beanTwo" class="org.nanocontext.xml.subjects.ConstructorTestSubject" scope="singleton">
+    </bean>
+</beans>

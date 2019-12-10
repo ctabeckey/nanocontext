@@ -1,0 +1,1 @@
+xjc -d ../java -p org.nanocontext.xml ctx.xsd

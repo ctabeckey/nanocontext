@@ -1,0 +1,16 @@
+<beans xmlns="http://nanocontext.org/v1/schema/ctx">
+    <artifact id="commonsio">
+        <!-- <resource>file:///Users/cbeckey/.m2/raptor2/commons-io/commons-io/2.4/commons-io-2.4.jar</resource> -->
+        <!-- <resource>http://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4-javadoc.jar</resource> -->
+        <resource>https://search.maven.org/remotecontent?filepath=org/apache/commons/commons-io/1.3.2/commons-io-1.3.2.jar</resource>
+    </artifact>
+    <bean id="nullInStream"
+          class="org.apache.commons.io.input.NullInputStream"
+          scope="singleton"
+          artifact="commonsio">
+        <constructor-arg>
+            <value>1024</value>
+        </constructor-arg>
+    </bean>
+
+</beans>

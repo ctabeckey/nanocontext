@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><beans xmlns="http://xml.nanocontext.org/v1/schema/ctx"><bean id="independent-bean" class="IndependentBean" scope="singleton" lazy-load="false"/></beans>
