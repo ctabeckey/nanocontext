@@ -14,32 +14,34 @@ import java.util.stream.Stream;
  * within this context it will delegate to a parent context.
  */
 public class Context {
+    private final String identifier;
+
     /**
      * The bean references that make up this context.
      * Immutable once created.
      * NOTE: natural ordering of AbstractReferencableProperty is by identifier
      */
-    private TreeSet<AbstractReferencableProperty> referencableProperties;
-    private Set<ArtifactHolder> artifacts;
-    private Set<PropertiesHolder> properties;
+    private final SortedSet<AbstractReferencableProperty> referencableProperties = new TreeSet<>();
+    private final Set<ArtifactHolder> artifacts = new HashSet<>();
+    private final Set<PropertiesHolder> properties = new HashSet<>();
     private final ThreadGroup contextThreadGroup;
     private final Context parent;
 
     /**
-     * Package level scope is intentional, only the XMLContextFactory should
+     * Package level scope is intentional, only a ContextFactory should
      * construct instances of this Class.
      */
-    public Context() {
-        this(null);
-    }
-
-    /**
-     * Package level scope is intentional, only the XMLContextFactory should
-     * construct instances of this Class.
-     */
-    public Context(final Context parent) {
-        this.contextThreadGroup = new ThreadGroup("ContextThreadGroup");
+    public Context(final Context parent,
+                   final SortedSet<AbstractReferencableProperty> referencableProperties,
+                   final Set<ArtifactHolder> artifacts,
+                   final Set<PropertiesHolder> properties) {
+        this.identifier = UUID.randomUUID().toString();
+        this.contextThreadGroup = new ThreadGroup("ContextThreadGroup_" + this.identifier);
         this.parent = parent;
+
+        this.referencableProperties.addAll(referencableProperties);
+        this.artifacts.addAll(artifacts);
+        this.properties.addAll(properties);
     }
 
     /**
@@ -58,36 +60,6 @@ public class Context {
      */
     public ThreadGroup getContextThreadGroup() {
         return contextThreadGroup;
-    }
-
-    /**
-     * Package level scope is intentional, only the XMLContextFactory should
-     * call this method.
-     *
-     * @param artifacts
-     */
-    public void setArtifacts(Set<ArtifactHolder> artifacts) {
-        this.artifacts = Collections.unmodifiableSet(artifacts);
-    }
-
-    /**
-     * Package level scope is intentional, only the XMLContextFactory should
-     * call this method.
-     *
-     * @param properties
-     */
-    public void setProperties(Set<PropertiesHolder> properties) {
-        this.properties = properties;
-    }
-
-    /**
-     * This method should only be called by a context factory implementation.
-     *
-     * @param referencableProperties
-     */
-    public void setContextObjectsMap(final Set<AbstractReferencableProperty> referencableProperties) {
-        this.referencableProperties = new TreeSet<>();
-        this.referencableProperties.addAll(referencableProperties);
     }
 
     /**
@@ -185,6 +157,9 @@ public class Context {
     }
 
     /**
+     * Get a Bean from the context whose identifer equals exactly the given
+     * value and, if the beanClass is not null,  whose type is the same as the beanClass
+     *
      * @param id
      * @param beanClass
      * @param <T>
@@ -312,6 +287,46 @@ public class Context {
             if (ActiveBean.class.isAssignableFrom(activeBean.getClass())) {
                 ((ActiveBean)activeBean).shutdown();
             }
+        }
+    }
+
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder {
+        private SortedSet<AbstractReferencableProperty> referencableProperties = new TreeSet<>();
+        private Set<ArtifactHolder> artifacts = new HashSet<>();
+        private Set<PropertiesHolder> properties = new HashSet<>();
+        private Context parent;
+
+        private Builder() {
+        }
+
+        public Builder withReferencableProperties(SortedSet<AbstractReferencableProperty> referencableProperties) {
+            this.referencableProperties = referencableProperties;
+            return this;
+        }
+
+        public Builder withArtifacts(Set<ArtifactHolder> artifacts) {
+            this.artifacts = artifacts;
+            return this;
+        }
+
+        public Builder withProperties(Set<PropertiesHolder> properties) {
+            this.properties = properties;
+            return this;
+        }
+
+        public Builder withParent(Context parent) {
+            this.parent = parent;
+            return this;
+        }
+
+        public Context build() {
+            Context context = new Context(parent, referencableProperties, artifacts, properties);
+            return context;
         }
     }
 }

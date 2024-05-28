@@ -30,36 +30,36 @@ public class ContextConstructionTest {
     public Object[][] contextNoDependenciesTestDataProvider() {
         return new Object[][] {
                 new Object[]{
-                        "OneBeanContext.xml",
+                        "OneBeanContext.org.nanocontext.xml",
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON)
                         }
                 },
                 new Object[]{
-                        "OneBeanContextWithProperties.xml",
+                        "OneBeanContextWithProperties.org.nanocontext.xml",
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON)
                         }
                 },
                 new Object[]{
-                        "OneBeanContextWithCtorArg.xml",
+                        "OneBeanContextWithCtorArg.org.nanocontext.xml",
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON)
                         }
                 },
                 new Object[]{
-                        "OnePrototypeBeanContext.xml",
+                        "OnePrototypeBeanContext.org.nanocontext.xml",
                         new BeanSpec[]{new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.PROTOTYPE)}
                 },
                 new Object[]{
-                        "TwoBeanContext.xml",
+                        "TwoBeanContext.org.nanocontext.xml",
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                                 new BeanSpec("beanTwo", ConstructorTestSubject.class, ScopeType.SINGLETON)
                         }
                 },
                 new Object[]{
-                        "OneRemoteBeanContext.xml",
+                        "OneRemoteBeanContext.org.nanocontext.xml",
                         new BeanSpec[]{
                                 new BeanSpec("nullInStream", null, ScopeType.SINGLETON)
                         }
@@ -102,12 +102,12 @@ public class ContextConstructionTest {
     public Object[][] contextChildDependenciesTestDataProvider() {
         return new Object[][]{
                 new Object[]{
-                        "OneBeanWithChildContext.xml",
+                        "OneBeanWithChildContext.org.nanocontext.xml",
                         new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                         new String[]{"getChild"}
                 },
                 new Object[]{
-                        "OneBeanWithReferencedChildContext.xml",
+                        "OneBeanWithReferencedChildContext.org.nanocontext.xml",
                         new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                         new String[]{"getChild"}
                 },
@@ -141,7 +141,7 @@ public class ContextConstructionTest {
     public Object[][] simpleContextListsTestDataProvider() {
         return new Object[][]{
                 new Object[]{
-                        "OneBeanWithListContext.xml",
+                        "OneBeanWithListContext.org.nanocontext.xml",
                         new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                         "getStrings",
                         new String[]{"42", "655321"}
@@ -177,7 +177,7 @@ public class ContextConstructionTest {
     public Object[][] complexContextListsTestDataProvider() {
         return new Object[][]{
                 new Object[]{
-                        "OneBeanWithListComplexContext.xml",
+                        "OneBeanWithListComplexContext.org.nanocontext.xml",
                         new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                         "getChildren",
                         new ConstructorTestSubject[] {
@@ -227,13 +227,13 @@ public class ContextConstructionTest {
     public Object[][] contextHierarchyTestDataProvider() {
         return new Object[][] {
                 new Object[]{
-                        new String[]{"OneBeanContext.xml", "OneRemoteBeanContext.xml"},
+                        new String[]{"OneBeanContext.org.nanocontext.xml", "OneRemoteBeanContext.org.nanocontext.xml"},
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON)
                         }
                 },
                 new Object[]{
-                        new String[]{"OneBeanContext.xml", "TwoBeanContext.xml"},
+                        new String[]{"OneBeanContext.org.nanocontext.xml", "TwoBeanContext.org.nanocontext.xml"},
                         new BeanSpec[]{
                                 new BeanSpec("beanOne", ConstructorTestSubject.class, ScopeType.SINGLETON),
                                 new BeanSpec("beanTwo", ConstructorTestSubject.class, ScopeType.SINGLETON)

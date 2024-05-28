@@ -20,7 +20,7 @@ public class ActiveBeanContextTest {
     @DataProvider
     public Object[][] activeBeanTestDataProviderTest() {
         return new Object[][] {
-                new Object[]{"/OneActiveBeanContext.xml", "beanOne", SimpleActiveBean.class, "getValue", SimpleActiveBean.ranValue}
+                new Object[]{"/OneActiveBeanContext.org.nanocontext.xml", "beanOne", SimpleActiveBean.class, "getValue", SimpleActiveBean.ranValue}
         };
     }
 

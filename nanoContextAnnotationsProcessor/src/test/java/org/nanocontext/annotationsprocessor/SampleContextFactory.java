@@ -1,12 +1,15 @@
-package ${packageName};
+package org.nanocontext.annotationsprocessor;
 
 import org.nanocontext.core.*;
 import org.nanocontext.core.exceptions.*;
 
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
-public class ${contextFactoryName} implements org.nanocontext.core.ContextFactory {
+/**
+ * This class is here to provide a prototype for a ContextFactory generation
+ */
+public class SampleContextFactory implements org.nanocontext.core.ContextFactory {
     private ClassLoader classLoader = null;
     private org.nanocontext.core.Context parentContext = null;
 
@@ -25,6 +28,8 @@ public class ${contextFactoryName} implements org.nanocontext.core.ContextFactor
 
 
         Context ctx = parentContext != null ? new Context(parentContext) : new Context();
+
+
 
         ctx.setContextObjectsMap(contextObjectsNameMap.entrySet().stream()
                 .map(entry -> entry.getValue())

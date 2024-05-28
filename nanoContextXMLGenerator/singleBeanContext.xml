@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><beans xmlns="http://xml.nanocontext.org/v1/schema/ctx"><bean id="ts2" class="TestSubjectTwo" scope="singleton"/></beans>
+<?org.nanocontext.xml version="1.0" encoding="UTF-8" standalone="yes"?><beans xmlns="http://org.nanocontext.xml.nanocontext.org/v1/schema/ctx"><bean id="ts2" class="TestSubjectTwo" scope="singleton"/></beans>

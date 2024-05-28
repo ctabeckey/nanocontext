@@ -1,9 +1,33 @@
 package org.nanocontext.utility.references;
 
 /**
- *
+ * This class calculates a "derivation distance", a count of the
+ * shortest path of class derivation.
+ * Example:
+ * String.class -> String.class = 0
+ * "Hello World" -> String.class =  0
+ * String.class -> Object.class = 1
+ * String.class -> CharSequence.class = 1
+ * List.class -> Iterable.class = 2 (List -> Collection -> Iterable)
  */
 public class Derivations {
+
+    /**
+     *
+     * @param subject
+     * @param baseObject
+     * @return
+     */
+    public static int instanceDistance(final Object subject, final Object baseObject) {
+        if (subject == null) {
+            throw new IllegalArgumentException("'subject' is null and must not be.");
+        }
+        if (baseObject == null) {
+            throw new IllegalArgumentException("'baseObject' is null and must not be.");
+        }
+        return distance(subject.getClass(), baseObject.getClass());
+    }
+
     /**
      * @param subject
      * @param baseClazz

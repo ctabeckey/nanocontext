@@ -67,11 +67,11 @@ public class AnnotationProcessorTest {
     public Object[][] sourceResourceDataProvider() {
         return new Object[][] {
                 new Object[]{
-                        "independentBeanContext.xml",
+                        "independentBeanContext.org.nanocontext.xml",
                         new File[]{new File("src/test/resources/IndependentBean.java")}
                 },
                 new Object[]{
-                        "dependentBeanContext.xml",
+                        "dependentBeanContext.org.nanocontext.xml",
                         new File[]{new File("src/test/resources/IndependentBean.java"),
                                 new File("src/test/resources/DependentBean.java")}
                 }
@@ -102,8 +102,8 @@ public class AnnotationProcessorTest {
     //@DataProvider
     public Object[][] annotationProcessorTestData() {
         return new Object[][] {
-                new Object[]{"singleBeanContext.xml", new String[]{"TestSubjectTwo.java"}},
-                new Object[]{"doubleBeanContext.xml", new String[]{"TestSubject.java", "TestSubjectTwo.java"}},
+                new Object[]{"singleBeanContext.org.nanocontext.xml", new String[]{"TestSubjectTwo.java"}},
+                new Object[]{"doubleBeanContext.org.nanocontext.xml", new String[]{"TestSubject.java", "TestSubjectTwo.java"}},
         };
     }
 

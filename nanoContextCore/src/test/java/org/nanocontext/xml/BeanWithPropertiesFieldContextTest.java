@@ -20,7 +20,7 @@ public class BeanWithPropertiesFieldContextTest {
     @DataProvider
     public Object[][] testDataProvider() {
         return new Object[][] {
-                new Object[]{"/OneBeanWithPropertiesFieldContext.xml",
+                new Object[]{"/OneBeanWithPropertiesFieldContext.org.nanocontext.xml",
                         "beanOne",
                         BeanWithPropertiesConstructorArg.class,
                         "getPropertyValue",

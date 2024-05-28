@@ -19,6 +19,7 @@ idea/
 .settings
 .project
 .idea
-.idea/workspace.xml
+.idea/workspace.org.nanocontext.xml
 
 infer-out
+**/.DS_Store
