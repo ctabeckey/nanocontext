@@ -18,14 +18,17 @@ public class ContextFactoryGenerator {
     public ContextFactoryGenerator() throws IOException {
         cfg = new Configuration();
 
-        cfg.setDirectoryForTemplateLoading(new File("."));
+        cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
         cfg.setWrapUncheckedExceptions(true);
     }
 
-    public void writeContextFactory(ContextFactoryDataModel contextDataModel, Writer moduleWriter) throws IOException, TemplateException {
+    public void writeContextFactory(
+            final ContextFactoryDataModel contextDataModel,
+            final Writer moduleWriter)
+            throws IOException, TemplateException {
         if (contextDataModel != null) {
             Template template = cfg.getTemplate("ContextFactory.ftl");
             template.process(contextDataModel, moduleWriter);

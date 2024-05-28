@@ -8,7 +8,7 @@ For that reason the emphasis is on small deployment size (to reduce download tim
 
 ## Configuration
 nanoContext uses an XML configuration file that echos Spring configuration:
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
     <bean id="beanOne" class="ConstructorTestSubject" scope="singleton">
     </bean>
@@ -17,7 +17,7 @@ nanoContext uses an XML configuration file that echos Spring configuration:
 nanoContext supports constructor arguments for dependency injection, it does not support property injection. 
 This was a conscious decision for both executable size and performance, and because instances are thereby valid once constructed.
 Constructor arguments may be bean declarations, references to existing beans, constants, lists or property maps.
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
      <bean id="beanOne" class="ConstructorTestSubject" scope="singleton">
          <constructor-arg>
@@ -38,7 +38,7 @@ public class ConstructorTestSubject {
  
 nanoContext supports both static and bean factory methods. 
 When using a factory method or factory class the parameters to the factory method are still specified using constructor-arg elements.
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
      <bean id="beanOne" class="ConstructorTestSubject" scope="singleton" factory-method="create">
          <constructor-arg>
@@ -61,7 +61,7 @@ public class ConstructorTestSubject {
 ```
 
 nanoContext can download and instantiate beans from remote resources
-```xml
+```org.nanocontext.xml
     <artifact id="commonsio">
         <resource>https://mavencentral.com/nexus/service/local/repositories/central/content/commons-io/commons-io/2.4/commons-io-2.4.jar</resource>
     </artifact>
@@ -75,7 +75,7 @@ nanoContext can download and instantiate beans from remote resources
     </bean>
 ```
 nanoContext implements "active" classes, which are simply executable classes. Active classes are started at framework startup time. 
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
     <bean id="beanOne" class="SimpleActiveBean" scope="singleton" active="true">
     </bean>
@@ -92,7 +92,7 @@ public class SimpleActiveBean implements Runnable {
 ```
 An active class may either implement the java.lang.Runnable interface or not, in which case the name of the method to start the instance must be provided.
 The method must take no arguments.
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
     <bean id="beanOne" class="org.nanocontext.core.subjects.AnotherActiveBean" scope="singleton" active="true" activate-method="doSomething">
     </bean>
@@ -116,7 +116,7 @@ Creating a context is done programmatically:
 ```java
 Context ctx = new ContextFactory()
                  .with(getClass()
-                 .getClassLoader().getResourceAsStream("context.xml"))
+                 .getClassLoader().getResourceAsStream("context.org.nanocontext.xml"))
                  .build();
 ```
 
@@ -167,7 +167,7 @@ public class DependentBean {
 }
 ```
 generates a context configuration like this
-```xml
+```org.nanocontext.xml
 <beans xmlns="http://core.nanocontext.org/v1/schema/ctx">
     <bean id="independent-bean" class="IndependentBean" scope="singleton" lazy-load="false"/>
     <bean id="dependent-bean" class="DependentBean" scope="singleton" lazy-load="false">

@@ -1,8 +1,8 @@
 package org.nanocontext.xml;
 
+import org.nanocontext.core.exceptions.ContextInitializationException;
 import org.nanocontext.utility.Utility;
 import org.nanocontext.utility.exceptions.CannotCreateObjectFromStringException;
-import org.nanocontext.core.exceptions.ContextInitializationException;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,7 +25,7 @@ public class UtilityTest {
                 new Object[]{Integer.class, "-1", new Integer(-1)},
                 new Object[]{Integer.class, "0", new Integer(0)},
                 new Object[]{Float.class, "1.0", new Float(1.0)},
-                new Object[]{Class.class, "java.lang.Object", java.lang.Object.class},
+                new Object[]{Class.class, "java.lang.Object", Object.class},
                 new Object[]{String.class, "1.0", "1.0"},
         };
     }

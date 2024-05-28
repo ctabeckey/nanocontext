@@ -4,6 +4,7 @@ import org.nanocontext.core.exceptions.ContextInitializationException;
 
 /**
  * Interface definition for the Context Factories.
+ * A ContextFactory creates an instance of a Context at runtime.
  */
 public interface ContextFactory {
     public ContextFactory withClassLoader(final ClassLoader classLoader) throws ContextInitializationException;

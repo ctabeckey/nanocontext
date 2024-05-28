@@ -1,7 +1,8 @@
-package org.nanocontext.xml;
+package org.nanocontext.context;
 
 import org.nanocontext.core.*;
 import org.nanocontext.core.exceptions.ContextInitializationException;
+import org.nanocontext.xml.*;
 import org.nanocontext.xml.exceptions.InvalidArtifactSyntaxException;
 import org.nanocontext.xml.exceptions.InvalidPropertiesSyntaxException;
 import org.slf4j.Logger;
@@ -10,28 +11,19 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
- * A ContextFactor which reads an XML file and generates an
- * instance of a derivation of Context.
+ *
  */
-public class XMLContextFactory implements ContextFactory {
+public class AbstractContextFactory implements ContextFactory {
     /** */
-    private final static Logger LOGGER = LoggerFactory.getLogger(XMLContextFactory.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(AbstractContextFactory.class);
 
     /** JAXB Context is created on demand */
     private JAXBContext jaxbContext = null;
@@ -72,7 +64,7 @@ public class XMLContextFactory implements ContextFactory {
     /**
      *
      */
-    public XMLContextFactory() {
+    public AbstractContextFactory() {
     }
 
     /**
@@ -93,7 +85,7 @@ public class XMLContextFactory implements ContextFactory {
      * @param classLoader
      * @return
      */
-    public XMLContextFactory withClassLoader(final ClassLoader classLoader) {
+    public AbstractContextFactory withClassLoader(final ClassLoader classLoader) {
         this.classLoader = classLoader;
         return this;
     }
@@ -103,7 +95,7 @@ public class XMLContextFactory implements ContextFactory {
      * @param beansType
      * @return
      */
-    public XMLContextFactory with(final Beans beansType) {
+    public AbstractContextFactory with(final Beans beansType) {
         for (BeanType beanType : beansType.getBean()) {
             // default the scope to prototype
             if (beanType.getScope() == null) {
@@ -124,7 +116,7 @@ public class XMLContextFactory implements ContextFactory {
         return this;
     }
 
-    public XMLContextFactory with(final BeanType beanType) {
+    public AbstractContextFactory with(final BeanType beanType) {
         if (beanType != null) {
             if (! this.beanTypes.contains(beanType)) {
                 this.beanTypes.add(beanType);
@@ -134,7 +126,7 @@ public class XMLContextFactory implements ContextFactory {
         return this;
     }
 
-    public XMLContextFactory withArtifact(final ResourceType artifact) {
+    public AbstractContextFactory withArtifact(final ResourceType artifact) {
         if (artifact != null) {
             this.artifacts.add(artifact);
         }
@@ -142,7 +134,7 @@ public class XMLContextFactory implements ContextFactory {
         return this;
     }
 
-    public XMLContextFactory withProperty(final ResourceType propertiesType) {
+    public AbstractContextFactory withProperty(final ResourceType propertiesType) {
         if (propertiesType != null) {
             this.properties.add(propertiesType);
         }
@@ -158,7 +150,7 @@ public class XMLContextFactory implements ContextFactory {
      * @return
      * @throws ContextInitializationException
      */
-    public XMLContextFactory withExternalBeanDefinition(final String identifier, final Object bean)
+    public AbstractContextFactory withExternalBeanDefinition(final String identifier, final Object bean)
             throws ContextInitializationException {
         if (bean != null) {
             withExternalBeanDefinition(new ExternalBeanDefinition(identifier, bean));
@@ -171,7 +163,7 @@ public class XMLContextFactory implements ContextFactory {
      * @param xBeanDef
      * @return
      */
-    private XMLContextFactory withExternalBeanDefinition(ExternalBeanDefinition xBeanDef) {
+    private AbstractContextFactory withExternalBeanDefinition(ExternalBeanDefinition xBeanDef) {
         if (xBeanDef != null) {
             if (xBeanDef.getIdentifier() == null) {
                 xBeanDef = new ExternalBeanDefinition(UUID.randomUUID().toString(), xBeanDef.beanInstance);
@@ -190,7 +182,7 @@ public class XMLContextFactory implements ContextFactory {
      * @return
      * @throws ContextInitializationException
      */
-    public XMLContextFactory withParentContext(final Context parent)
+    public AbstractContextFactory withParentContext(final Context parent)
             throws ContextInitializationException {
         this.parent = parent;
         return this;
@@ -209,7 +201,7 @@ public class XMLContextFactory implements ContextFactory {
      * @throws ContextInitializationException
      * @throws FileNotFoundException
      */
-    public XMLContextFactory with(final File contextDefinition)
+    public AbstractContextFactory with(final File contextDefinition)
             throws JAXBException, ContextInitializationException, FileNotFoundException {
         FileInputStream fiS = new FileInputStream(contextDefinition);
         return with(fiS);
@@ -223,7 +215,7 @@ public class XMLContextFactory implements ContextFactory {
      * @throws ContextInitializationException
      * @throws IOException
      */
-    public XMLContextFactory with(final URL contextDefinition)
+    public AbstractContextFactory with(final URL contextDefinition)
             throws JAXBException, ContextInitializationException, IOException {
         InputStream urlIS = contextDefinition.openStream();
         return with(urlIS);
@@ -236,7 +228,7 @@ public class XMLContextFactory implements ContextFactory {
      * @throws JAXBException
      * @throws ContextInitializationException
      */
-    public XMLContextFactory with(final InputStream inputStream)
+    public AbstractContextFactory with(final InputStream inputStream)
             throws JAXBException, ContextInitializationException {
         JAXBContext jaxbContext = getJaxbContext();
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

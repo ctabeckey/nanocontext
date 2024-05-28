@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?org.nanocontext.xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <beans xmlns="http://nanocontext.org/v1/schema/ctx">
     <properties id="contextProperties">
         <resource>rsc:beanContext.properties</resource>

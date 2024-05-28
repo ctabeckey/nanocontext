@@ -12,7 +12,7 @@ import java.io.IOException;
  * references the type is always the type from the context configuration (XML file).
  * For constants, the type is a String when the property is first created. As part of
  * the process of matching a property to concrete constructor arguments, a property may
- * be "morphed" to another resolved type. An AbstractProperty and all of its derivations
+ * be morphed to another resolved type. An AbstractProperty and all of its derivations
  * is immutable, so a morph actually creates another instance.
  * A List may also be morphed, its type is dependent on its element types and its usage
  * as either a List or an array.

@@ -3,7 +3,6 @@ package org.nanocontext.xml;
 import org.nanocontext.core.AbstractProperty;
 import org.nanocontext.core.Context;
 import org.nanocontext.core.ContextUtility;
-import org.nanocontext.utility.Utility;
 import org.nanocontext.core.exceptions.ContextInitializationException;
 import org.nanocontext.xml.subjects.ConstructorTestSubject;
 import org.testng.Assert;

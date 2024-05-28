@@ -44,7 +44,7 @@ public class AnnotationProcessor implements Processor {
     public static final String CONTEXT_OPTION = "context";
     public static final String MANAGER_PACKAGE_OPTION = "package";
     public static final String MANAGER_OPTION = "manager";
-    public static final String DEFAULT_CONTEXT_XML = "context.xml";
+    public static final String DEFAULT_CONTEXT_XML = "context.org.nanocontext.xml";
     public static final String DEFAULT_MANAGER = "nanocontext.java";
     public static final String DEFAULT_PACKAGE = null;
 
@@ -180,7 +180,7 @@ public class AnnotationProcessor implements Processor {
                             .createResource(StandardLocation.CLASS_OUTPUT, "", contextFileName, (Element [])null);
                     contextFileOut = outputContextFile.openOutputStream();
 
-                    JAXBContext jaxbContext = JAXBContext.newInstance("org.nanocontext.xml");
+                    JAXBContext jaxbContext = JAXBContext.newInstance("org.nanocontext.org.nanocontext.xml");
                     jaxbContext.createMarshaller().marshal(beansType, contextFileOut);
 
                     outputManagerFile = this.processingEnv.getFiler()
