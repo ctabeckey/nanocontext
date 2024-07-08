@@ -26,4 +26,5 @@ public @interface NanoBean {
     boolean lazyLoad() default false;
     boolean active() default false;
     String activate() default "run";
+    String context() default "default";
 }

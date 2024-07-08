@@ -5,8 +5,6 @@ import org.nanocontext.utility.Utility;
 import org.nanocontext.utility.references.Derivations;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * A very small and limited function IoC Context.

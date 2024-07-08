@@ -1,5 +1,8 @@
 package org.nanocontext.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -22,6 +25,8 @@ public class ArtifactHolder {
     private final ReentrantLock loadedLock = new ReentrantLock();
     private final Condition notLoaded  = loadedLock.newCondition();
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(ArtifactHolder.class);
+
     /**
      *
      * @param identifier
@@ -40,7 +45,7 @@ public class ArtifactHolder {
         if ("http".equals(artifactLocation.getProtocol()) || "https".equals(artifactLocation.getProtocol())) {
             String tempPath = System.getenv("TMPDIR");
             File tempDirectory = new File(tempPath);
-            System.out.println("Application "
+            LOGGER.debug("Application "
                     + (tempDirectory.canRead() ? "CAN read" : "CANNOT read")
                     + " and "
                     + (tempDirectory.canWrite() ? "CAN write" : "CANNOT write")

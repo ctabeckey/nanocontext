@@ -47,8 +47,7 @@ public class AbstractBeanInstanceFactoryTest {
         bean.setScope(ScopeType.SINGLETON);
         ctxFactory.with(bean);
 
-        ctx = ctxFactory
-                .build();
+        ctx = ctxFactory.build();
     }
 
     @Test
