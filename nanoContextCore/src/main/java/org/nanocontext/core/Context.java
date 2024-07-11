@@ -293,6 +293,9 @@ public class Context {
         return new Builder();
     }
 
+    public void setContextObjectsMap(Set<AbstractReferencableProperty> contextObjects) {
+    }
+
     public static final class Builder {
         private SortedSet<AbstractReferencableProperty> referencableProperties = new TreeSet<>();
         private Set<ArtifactHolder> artifacts = new HashSet<>();
