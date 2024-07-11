@@ -1,0 +1,65 @@
+version: 0.2
+
+env:
+  shell: bash
+  # custom environment variables
+  variables:
+    key: "value"
+
+  # custom environment variables stored in Amazon EC2 Systems Manager Parameter Store
+  #parameter-store:
+  #  key: "value"
+
+  # to list environment variables you want to export (to be made available to subsequent stages)
+  exported-variables:
+    - key
+
+  # to retrieve custom environment variables stored in AWS Secrets Manager
+  #secrets-manager:
+  #  key: secret-id:json-key:version-stage:version-id
+
+  # to indicate if CodeBuild uses its Git credential helper to provide Git credentials,
+  # not supported for builds that are triggered by a webhook for a public Git repository
+  #git-credential-helper: no | yes
+
+# to represent settings if you run your build in an explicit proxy server
+#proxy:
+#  upload-artifacts: no | yes
+#  logs: no | yes
+
+#batch:
+#  fast-fail: false | true
+    # build-list:
+    # build-matrix:
+    # build-graph:
+
+phases:
+  install:
+    # specify a Linux user that runs its commands
+    #run-as: Linux-user-name
+
+    # the action to take if a failure occurs during the phase (ABORT | CONTINUE)
+    on-failure: ABORT
+
+    # required runtime versions (<major>.<minor>, <major>.x, or latest)
+    # see https://docs.aws.amazon.com/codebuild/latest/userguide/available-runtimes.html#linux-runtimes
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    # specify a Linux user that runs its commands
+    #run-as: Linux-user-name
+    on-failure: ABORT
+    commands:
+      - echo pre_build Initiated
+    finally:
+      - echo pre_build Completed
+  build:
+    on-failure: ABORT
+    commands:
+      - echo build Initiated
+      - mvn clean install
+      - echo build Completed
+  post_build:
+    on-failure: ABORT
+    commands:
+      - echo post_build Initiated
