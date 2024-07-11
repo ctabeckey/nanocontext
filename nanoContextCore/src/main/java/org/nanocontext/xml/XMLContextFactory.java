@@ -357,7 +357,8 @@ public class XMLContextFactory implements ContextFactory {
             if (propertiesType.getResource() != null) {
                 try {
                     // an ArtifactHolder will load the Artifact
-                    PropertiesHolder holder = new PropertiesHolder(propertiesType.getId(), new URI(propertiesType.getResource()));
+                    // TODO: the context should not be null
+                    PropertiesHolder holder = new PropertiesHolder(null, propertiesType.getId(), new URI(propertiesType.getResource()));
                     // note that the holder will not be added if it is a duplicate
                     holders.add(holder);
                 } catch (MalformedURLException | URISyntaxException e) {
